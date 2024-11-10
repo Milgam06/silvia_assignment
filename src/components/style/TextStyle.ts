@@ -6,4 +6,10 @@ export const TextStyle = StyleSheet.create({
     fontWeight: 300,
     color: "#000",
   },
+
+  test: {
+    fontSize: 48,
+    fontWeight: "semi-bold",
+    color: "#000",
+  },
 });
