@@ -7,7 +7,6 @@ import {
   faCodeCommit,
   faCentSign,
   faBangladeshiTakaSign,
-  faO,
   faKipSign,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -46,10 +45,6 @@ export const KEY_IMAGE = [
   },
   {
     key: 9,
-    image: faO,
-  },
-  {
-    key: 10,
     image: faKipSign,
   },
 ];
