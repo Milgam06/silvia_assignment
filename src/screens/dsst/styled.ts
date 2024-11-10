@@ -2,10 +2,12 @@ import { StyleSheet } from "react-native";
 
 export const TestViewStyle = StyleSheet.create({
   keyAndImageContainer: {
-    flex: 0.6,
+    flex: 0.5,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: "#f5ebe0",
   },
   keyAndImageView: {
