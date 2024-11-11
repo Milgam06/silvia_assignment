@@ -30,4 +30,10 @@ export const TextStyle = StyleSheet.create({
     fontWeight: "800",
     color: "#c9184a",
   },
+
+  buttonText: {
+    fontSize: 24,
+    fontWeight: "900",
+    color: "#fff",
+  },
 });
