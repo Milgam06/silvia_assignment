@@ -6,11 +6,6 @@ export const ReportStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  title: {
-    fontSize: 74,
-    fontWeight: "900",
-    paddingTop: 140,
-  },
   infoContainer: {
     flex: 1,
     // justifyContent: "center",
