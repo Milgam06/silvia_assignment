@@ -10,6 +10,6 @@ export const HomeStyle = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     gap: 20,
-    paddingTop: 20,
+    marginTop: 80,
   },
 });
