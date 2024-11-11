@@ -32,6 +32,7 @@ v21.6.2
 ## command
 
 패키지 설치 - yarn install
+
 실행 - yarn start
 
 
