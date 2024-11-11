@@ -4,18 +4,30 @@ export const TextStyle = StyleSheet.create({
   default: {
     fontSize: 12,
     fontWeight: "300",
-    color: "#000",
   },
 
   questionBoxKey: {
     fontSize: 72,
     fontWeight: "bold",
-    color: "#000",
   },
 
   testKey: {
     fontSize: 36,
     fontWeight: "300",
-    color: "#000",
+  },
+
+  reportInfo: {
+    fontSize: 28,
+    fontWeight: "700",
+  },
+  reportGoodData: {
+    fontSize: 40,
+    fontWeight: "800",
+    color: "#2ec4b6",
+  },
+  reportBadData: {
+    fontSize: 40,
+    fontWeight: "800",
+    color: "#c9184a",
   },
 });
