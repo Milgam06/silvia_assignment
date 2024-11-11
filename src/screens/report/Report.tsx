@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { TestStore } from "@/stores/TestStore";
-import { TextStyle } from "@/components";
+import { TextStyle, NavigateButton } from "@/components";
 
 import { ReportStyle } from "./styled";
 
 export const Report: React.FC = () => {
+  const navigate = useNavigation();
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
   const [averageReactionTime, setAverageReactionTime] = useState<number>(0);
 
@@ -27,6 +29,10 @@ export const Report: React.FC = () => {
       stepData.length > 0 ? totalReactionTime / stepData.length : 0;
     setAverageReactionTime(avgReactionTime);
   }, []);
+
+  const handleNavigate = () => {
+    navigate.navigate("Home");
+  };
 
   return (
     <>
@@ -60,6 +66,9 @@ export const Report: React.FC = () => {
           </Text>
           초
         </Text>
+        <View style={ReportStyle.buttonView}>
+          <NavigateButton onPress={handleNavigate} buttonText="홈 화면으로" />
+        </View>
       </View>
     </>
   );
