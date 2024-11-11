@@ -23,17 +23,15 @@
 
 이 폴더는 애플리케이션 전반에서 사용되는 유틸리티 함수를 포함합니다. 무작위 숫자를 생성하는 `randomization`가 포함되어 있습니다.
 
----
 
 ## Node version
 
 v21.6.2
 
----
 
 ## command
 
 패키지 설치 - yarn install
 실행 - yarn start
 
----
+
