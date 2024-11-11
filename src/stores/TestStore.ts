@@ -1,26 +1,3 @@
-// interface IStepData {
-//   stepQuestion: number;
-//   questionAnswer: number;
-//   isCorrect: boolean;
-//   reactionTime: number;
-// }
-
-// export class TestStore {
-//   static stepData: IStepData[] = [];
-//   constructor(answer: number) {
-
-//   }
-// }
-
-// export class StepData {
-//   //   stepQuestions: number[];
-//   //   constructor() {
-//   //     const { randomNumList } = randomization();
-//   //     const questionList = randomNumList(1, 10);
-//   //     this.stepQuestions = questionList;
-//   //   }
-// }
-
 import { randomization } from "@/utils";
 
 interface IStepData {
