@@ -8,9 +8,14 @@ export const TextStyle = StyleSheet.create({
 
   questionBoxKey: {
     fontSize: 72,
-    fontWeight: "bold",
+    fontWeight: "900",
   },
-
+  title: {
+    fontSize: 70,
+    fontWeight: "900",
+    paddingTop: 140,
+    textAlign: "center",
+  },
   testKey: {
     fontSize: 36,
     fontWeight: "300",
