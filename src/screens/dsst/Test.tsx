@@ -1,15 +1,67 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useNavigation } from "@react-navigation/native";
 
 import { TextStyle, QuestionBox, QuestionBoxProps } from "@/components";
 import { KEY_IMAGE } from "@/constants";
+import { randomization } from "@/utils";
+import { TestStore } from "@/stores";
 
 import { TestViewStyle } from "./styled";
 
 export const Test: React.FC = () => {
-  // answer state 추가
-  const [answer, setAnswer] = useState<QuestionBoxProps>();
+  const navigation = useNavigation();
+
+  // 랜덤 숫자 리스트 생성 (1부터 9까지의 숫자 중 15개의 랜덤 숫자 리스트)
+  const { randomNumList } = randomization();
+  const questionList = randomNumList(1, 9, 15);
+
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [question, setQuestion] = useState<number>(questionList[currentStep]);
+  const [answer, setAnswer] = useState<QuestionBoxProps | null>(null);
+  const [isAnswering, setIsAnswering] = useState<boolean>(false);
+  const [stepReactTime, setStepReactTime] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Test 완료 시 Report 화면으로 이동
+    if (currentStep >= questionList.length) {
+      navigation.navigate("Report");
+      return;
+    }
+    // 각 Step 당 state 변경
+    setQuestion(questionList[currentStep]);
+    setStepReactTime(new Date().getTime());
+  }, [currentStep]);
+
+  // 정답 선택 핸들러
+  const onAnswerHandler = (selectedAnswer: QuestionBoxProps) => {
+    // 중복 클릭 방지
+    if (isAnswering) return;
+
+    setIsAnswering(true);
+    setAnswer(selectedAnswer);
+
+    // 반응 시간 계산
+    const reactionTime = stepReactTime
+      ? (new Date().getTime() - stepReactTime) / 1000
+      : 0;
+
+    // TestStore에 StepData 추가
+    TestStore.addStepData({
+      stepQuestion: question,
+      questionAnswer: selectedAnswer.questionNumber,
+      isCorrect: selectedAnswer.questionNumber === question,
+      reactionTime: reactionTime,
+    });
+
+    // 0.3초 후, 다음 Step 이동
+    setTimeout(() => {
+      setCurrentStep((prevStep) => prevStep + 1);
+      setAnswer(null);
+      setIsAnswering(false);
+    }, 300);
+  };
 
   return (
     <>
@@ -25,7 +77,7 @@ export const Test: React.FC = () => {
       </View>
 
       <View style={TestViewStyle.questionKeyContainer}>
-        <QuestionBox questionNumber={1} answering={answer?.answering} />
+        <QuestionBox questionNumber={question} answering={answer?.answering} />
       </View>
 
       {/* FlatList로 KEY_IMAGE data 3x3 배열 배치 */}
@@ -40,8 +92,12 @@ export const Test: React.FC = () => {
         data={KEY_IMAGE}
         renderItem={({ item }) => (
           <TouchableOpacity
+            disabled={isAnswering}
             onPress={() =>
-              setAnswer({ questionNumber: item.key, answering: item.image })
+              onAnswerHandler({
+                questionNumber: item.key,
+                answering: item.image,
+              })
             }
           >
             <View style={TestViewStyle.answerView}>
@@ -49,7 +105,7 @@ export const Test: React.FC = () => {
             </View>
           </TouchableOpacity>
         )}
-        keyExtractor={(index) => `${index}`}
+        keyExtractor={(item) => `${item.key}`}
         numColumns={3}
       />
     </>
