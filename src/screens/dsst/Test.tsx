@@ -67,7 +67,7 @@ export const Test: React.FC = () => {
       setCurrentStep((prevStep) => prevStep + 1);
       setAnswer(null);
       setIsAnswering(false);
-    }, 600);
+    }, 800);
   };
 
   return (
