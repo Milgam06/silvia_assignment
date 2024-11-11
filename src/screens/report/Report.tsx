@@ -37,7 +37,7 @@ export const Report: React.FC = () => {
   return (
     <>
       <View style={ReportStyle.titleView}>
-        <Text style={ReportStyle.title}>테스트 결과</Text>
+        <Text style={TextStyle.title}>테스트 결과</Text>
       </View>
       <View style={ReportStyle.infoContainer}>
         <Text style={TextStyle.reportInfo}>
