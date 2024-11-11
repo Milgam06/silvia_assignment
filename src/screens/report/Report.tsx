@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 
 import { TestStore } from "@/stores/TestStore";
+import { TextStyle } from "@/components";
 
 import { ReportStyle } from "./styled";
 
@@ -28,12 +29,38 @@ export const Report: React.FC = () => {
   }, []);
 
   return (
-    <View style={ReportStyle.container}>
-      <Text style={ReportStyle.title}>Test Report</Text>
-      <Text style={ReportStyle.info}>Correct Answers: {correctAnswers}</Text>
-      <Text style={ReportStyle.info}>
-        Average Reaction Time: {averageReactionTime.toFixed(1)} seconds
-      </Text>
-    </View>
+    <>
+      <View style={ReportStyle.titleView}>
+        <Text style={ReportStyle.title}>테스트 결과</Text>
+      </View>
+      <View style={ReportStyle.infoContainer}>
+        <Text style={TextStyle.reportInfo}>
+          정답 갯수 :{" "}
+          <Text
+            style={
+              correctAnswers > 7
+                ? TextStyle.reportGoodData
+                : TextStyle.reportBadData
+            }
+          >
+            {correctAnswers}
+          </Text>{" "}
+          / 15
+        </Text>
+        <Text style={TextStyle.reportInfo}>
+          평균 반응시간 :{" "}
+          <Text
+            style={
+              Number(averageReactionTime.toFixed(1)) < 1
+                ? TextStyle.reportGoodData
+                : TextStyle.reportBadData
+            }
+          >
+            {averageReactionTime.toFixed(1)}
+          </Text>
+          초
+        </Text>
+      </View>
+    </>
   );
 };
