@@ -1,11 +1,25 @@
 import { StyleSheet } from "react-native";
 
 export const QuestionBoxStyle = StyleSheet.create({
-  containerView: {
+  defaultContainerView: {
     flex: 0.4,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(255, 255, 255, 0.8)",
+    borderRadius: 20,
+  },
+  correctContainerView: {
+    flex: 0.4,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 255, 0, 0.4)",
+    borderRadius: 20,
+  },
+  wrongContainerView: {
+    flex: 0.4,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 0, 0, 0.4)",
     borderRadius: 20,
   },
   numberView: {
