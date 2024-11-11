@@ -10,14 +10,27 @@ import { QuestionBoxStyle } from "./styled";
 export interface QuestionBoxProps {
   questionNumber: number;
   answering?: IconDefinition;
+  isCorrect?: boolean;
 }
 
 export const QuestionBox: React.FC<QuestionBoxProps> = ({
   questionNumber,
   answering,
+  isCorrect,
 }) => {
+  const containerStyle = () => {
+    if (isCorrect === undefined) {
+      return QuestionBoxStyle.defaultContainerView;
+    }
+    switch (isCorrect) {
+      case true:
+        return QuestionBoxStyle.correctContainerView;
+      case false:
+        return QuestionBoxStyle.wrongContainerView;
+    }
+  };
   return (
-    <View style={QuestionBoxStyle.containerView}>
+    <View style={containerStyle()}>
       <View style={QuestionBoxStyle.numberView}>
         <Text style={TextStyle.questionBoxKey}>{questionNumber}</Text>
       </View>

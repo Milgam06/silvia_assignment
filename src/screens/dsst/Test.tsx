@@ -21,8 +21,10 @@ export const Test: React.FC = () => {
   const [question, setQuestion] = useState<number>(questionList[currentStep]);
   const [answer, setAnswer] = useState<QuestionBoxProps | null>(null);
   const [isAnswering, setIsAnswering] = useState<boolean>(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | undefined>(undefined);
   const [stepReactTime, setStepReactTime] = useState<number | null>(null);
 
+  // 각 step 시작 시 트리거
   useEffect(() => {
     // Test 완료 시 Report 화면으로 이동
     if (currentStep >= questionList.length) {
@@ -32,6 +34,7 @@ export const Test: React.FC = () => {
     // 각 Step 당 state 변경
     setQuestion(questionList[currentStep]);
     setStepReactTime(new Date().getTime());
+    setIsCorrect(undefined);
   }, [currentStep]);
 
   // 정답 선택 핸들러
@@ -47,6 +50,10 @@ export const Test: React.FC = () => {
       ? (new Date().getTime() - stepReactTime) / 1000
       : 0;
 
+    // 정답 여부 판별
+    const correct = selectedAnswer.questionNumber === question;
+    setIsCorrect(correct);
+
     // TestStore에 StepData 추가
     TestStore.addStepData({
       stepQuestion: question,
@@ -55,12 +62,12 @@ export const Test: React.FC = () => {
       reactionTime: reactionTime,
     });
 
-    // 0.3초 후, 다음 Step 이동
+    // 0.6초 후, 다음 Step 이동
     setTimeout(() => {
       setCurrentStep((prevStep) => prevStep + 1);
       setAnswer(null);
       setIsAnswering(false);
-    }, 300);
+    }, 800);
   };
 
   return (
@@ -77,7 +84,11 @@ export const Test: React.FC = () => {
       </View>
 
       <View style={TestViewStyle.questionKeyContainer}>
-        <QuestionBox questionNumber={question} answering={answer?.answering} />
+        <QuestionBox
+          questionNumber={question}
+          answering={answer?.answering}
+          isCorrect={isCorrect}
+        />
       </View>
 
       {/* FlatList로 KEY_IMAGE data 3x3 배열 배치 */}
